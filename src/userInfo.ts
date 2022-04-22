@@ -25,11 +25,11 @@ export interface UserInfo {
 /**
  * 학생 정보를 확인합니다.
  * @param endpoint 관할 시/도 엔드포인트
- * @param token 1차 로그인 토큰
+ * @param secondToken 2차 로그인 토큰
  * @returns {Promise<UserInfo>}
  */
-export async function userInfo(endpoint: string, token: string): Promise<UserInfo[]> {
-    const response = await fetchHcs('/v2/selectUserGroup', 'POST', {}, endpoint, token)
+export async function userInfo(endpoint: string, secondToken: string): Promise<UserInfo[]> {
+    const response = await fetchHcs('/v2/selectUserGroup', 'POST', {}, endpoint, secondToken)
     const list = []
     for (const user of (response as Array<any>)) {
         const data = {

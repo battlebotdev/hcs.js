@@ -53,7 +53,7 @@ const example = async () => {
         await hcs.registerPassword(school.endpoint, login.token, password)
     }
 
-    let token // 비밀번호로 로그인하여 새로운 토큰을 받아옵니다.
+    let secondToken // 비밀번호로 로그인하여 2차 로그인 토큰을 받아옵니다.
     while (true) {
         console.log('비밀번호 4자리를 입력해주세요.')
         const password = (await it.next()).value
@@ -73,7 +73,7 @@ const example = async () => {
             console.log('잘못된 비밀번호입니다. 5회 이상 실패시 5분 후에 재시도가 가능합니다.')
             console.log(`현재 ${fail.failCount}번 실패하셨습니다.`)
         } else {
-            token = secondLogin.token
+            secondToken = secondLogin.token
             break
         }
     }
@@ -95,7 +95,7 @@ const example = async () => {
          */
         Q3: false
     }
-    const result = await hcs.registerSurvey(school.endpoint, token, survey)
+    const result = await hcs.registerSurvey(school.endpoint, secondToken, survey)
     console.log(`${result.registeredAt} ${login.name}님 자가진단을 완료하셨습니다.`)
     process.exit(0)
 }
